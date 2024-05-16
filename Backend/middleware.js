@@ -11,6 +11,7 @@ export function authMiddleware(req, res, next) {
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
         req.userId = decoded.userId;
+        console.log(userId);
         next();
     } catch (err) {
         return res.status(403).json({ msg: "you are not authorized to do this" });

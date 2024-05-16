@@ -11,7 +11,7 @@ router.post("/signin", async (req, res) => {
 
     if (!success) res.sendStatus(411).json({ msg: "Invalid username or password" });
 
-    const user = User.findOne({
+    const user = await User.findOne({
         username: req.body.username,
         password: req.body.password
     });
@@ -23,9 +23,9 @@ router.post("/signin", async (req, res) => {
 
         res.json({ token: token });
         return;
-    }
+    } else console.log("in user");
 
-    res.sendStatus(411).json({ msg: "Error while logging in" });
+    res.json({ msg: "Error while logging in" });
 });
 
 router.post("/signup", async (req, res) => {
